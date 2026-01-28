@@ -2,7 +2,7 @@ import { JWT } from "google-auth-library";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { parse } from "@std/csv/parse";
 import { html } from "@mark/html";
-import credentials from "./servercoordinateslw-b80f5a7645ec.json" with { type: "json" };
+import credentials from "../servercoordinateslw-b80f5a7645ec.json" with { type: "json" };
 
 const authToken = new JWT({
 	email: credentials.client_email,
@@ -35,6 +35,11 @@ const data = parse(csv, { separator: "," })
 
 const indexHtml = html`
 	<!DOCTYPE html>
+	<style>
+		html {
+			font-family: system-ui;
+		}
+	</style>
 	<table>
 		<tr>
 			<th>Server</th>
@@ -51,4 +56,4 @@ const indexHtml = html`
 	</table>
 `();
 
-await Deno.writeTextFile("./docs/index.html", indexHtml);
+await Deno.writeTextFile("./website/index.html", indexHtml);

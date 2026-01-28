@@ -1,1 +1,1 @@
-@deno run --allow-all --env-file WebsiteServerCoordinates.mts
+@deno run --allow-all --env-file source\make_website.mts
