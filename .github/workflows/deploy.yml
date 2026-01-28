@@ -34,6 +34,8 @@ jobs:
       - run: deno run --allow-all ./source/make_website.mts
         env:
           SHEET_ID: ${{ secrets.SHEET_ID }}
+          CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
