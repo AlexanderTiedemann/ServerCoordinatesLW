@@ -7,6 +7,7 @@ on:
     paths:
       - .github/workflows/deploy.yml
       - website/*
+      - source/*
   schedule:
     - cron: '0 * * * *'
   workflow_dispatch:
