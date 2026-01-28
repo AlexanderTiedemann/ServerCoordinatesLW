@@ -1,1 +1,1 @@
-@deno run --allow-all WebsiteServerCoordinates.ts
+@deno run --allow-all --env-file WebsiteServerCoordinates.mts

@@ -1,1 +1,1 @@
-@explorer webseite\index.html
+@explorer docs\index.html
