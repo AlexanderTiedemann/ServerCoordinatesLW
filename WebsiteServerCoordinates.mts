@@ -36,6 +36,11 @@ const data = parse(csv, { separator: "," })
 const indexHtml = html`
 	<!DOCTYPE html>
 	<table>
+		<tr>
+			<th>Server</th>
+			<th>Last Update</th>
+			<th>Top 10 Alliances</th>
+		</tr>
 		${data.map(x => html`
 			<tr>
 				<td>${x.server.toString()}</td>
