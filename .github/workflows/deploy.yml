@@ -32,6 +32,8 @@ jobs:
         with:
           deno-version: 2.6.6
       - run: deno run --allow-all ./source/make_website.mts
+        env:
+          SHEET_ID: ${{ secrets.SHEET_ID }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

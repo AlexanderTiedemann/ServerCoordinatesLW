@@ -4,13 +4,7 @@ import { parse } from "@std/csv/parse";
 import { decodeBase64 } from "@std/encoding";
 import { html } from "@mark/html";
 
-function ensureEnvVar(name: string) {
-	const envVar = Deno.env.get(name);
-	if (envVar === undefined) {
-		throw new Error(`Missing env var ${name}`);
-	}
-	return envVar;
-}
+const sheetId = ensureEnvVar("SHEET_ID");
 
 const privateKey = new TextDecoder().decode(decodeBase64(ensureEnvVar("PRIVATE_KEY")));
 
@@ -19,8 +13,6 @@ const authToken = new JWT({
 	key: privateKey,
 	scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
-
-const sheetId = ensureEnvVar("SHEET_ID");
 
 const document = new GoogleSpreadsheet(sheetId, authToken);
 
@@ -67,3 +59,11 @@ const indexHtml = html`
 `();
 
 await Deno.writeTextFile("./website/index.html", indexHtml);
+
+function ensureEnvVar(name: string) {
+	const envVar = Deno.env.get(name);
+	if (envVar === undefined) {
+		throw new Error(`Missing env var ${name}`);
+	}
+	return envVar;
+}
