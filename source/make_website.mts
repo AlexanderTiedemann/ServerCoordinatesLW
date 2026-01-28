@@ -1,16 +1,26 @@
 import { JWT } from "google-auth-library";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { parse } from "@std/csv/parse";
+import { decodeBase64 } from "@std/encoding";
 import { html } from "@mark/html";
-import credentials from "../servercoordinateslw-b80f5a7645ec.json" with { type: "json" };
+
+function ensureEnvVar(name: string) {
+	const envVar = Deno.env.get(name);
+	if (envVar === undefined) {
+		throw new Error(`Missing env var ${name}`);
+	}
+	return envVar;
+}
+
+const privateKey = new TextDecoder().decode(decodeBase64(ensureEnvVar("PRIVATE_KEY")));
 
 const authToken = new JWT({
-	email: credentials.client_email,
-	key: credentials.private_key,
+	email: ensureEnvVar("CLIENT_EMAIL"),
+	key: privateKey,
 	scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
-const sheetId = Deno.env.get("SHEET_ID")!;
+const sheetId = ensureEnvVar("SHEET_ID");
 
 const document = new GoogleSpreadsheet(sheetId, authToken);
 

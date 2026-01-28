@@ -2,6 +2,7 @@
   "imports": {
     "@mark/html": "jsr:@mark/html@1.0.0",
     "@std/csv": "jsr:@std/csv@1.0.6",
+    "@std/encoding": "jsr:@std/encoding@1.0.10",
     "google-auth-library": "npm:google-auth-library@10.5.0",
     "google-spreadsheet": "npm:google-spreadsheet@5.0.2"
   }

@@ -4,6 +4,7 @@
     "jsr:@mark/html@1.0.0": "1.0.0",
     "jsr:@std/bytes@^1.0.5": "1.0.5",
     "jsr:@std/csv@1.0.6": "1.0.6",
+    "jsr:@std/encoding@1.0.10": "1.0.10",
     "jsr:@std/streams@^1.0.9": "1.0.9",
     "npm:google-auth-library@10.5.0": "10.5.0",
     "npm:google-spreadsheet@5.0.2": "5.0.2_google-auth-library@10.5.0"
@@ -20,6 +21,9 @@
       "dependencies": [
         "jsr:@std/streams"
       ]
+    },
+    "@std/encoding@1.0.10": {
+      "integrity": "8783c6384a2d13abd5e9e87a7ae0520a30e9f56aeeaa3bdf910a3eaaf5c811a1"
     },
     "@std/streams@1.0.9": {
       "integrity": "a9d26b1988cdd7aa7b1f4b51e1c36c1557f3f252880fa6cc5b9f37078b1a5035",
@@ -375,6 +379,7 @@
     "dependencies": [
       "jsr:@mark/html@1.0.0",
       "jsr:@std/csv@1.0.6",
+      "jsr:@std/encoding@1.0.10",
       "npm:google-auth-library@10.5.0",
       "npm:google-spreadsheet@5.0.2"
     ]

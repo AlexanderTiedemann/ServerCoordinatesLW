@@ -28,6 +28,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: 2.6.6
+      - run: deno run --allow-all --env-file ./source/make_website.mts
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
