@@ -31,7 +31,7 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: 2.6.6
-      - run: deno run --allow-all --env-file ./source/make_website.mts
+      - run: deno run --allow-all ./source/make_website.mts
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
