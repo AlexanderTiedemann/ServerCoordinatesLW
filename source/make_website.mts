@@ -2,7 +2,6 @@ import { JWT } from "google-auth-library";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { parse } from "@std/csv/parse";
 import { decodeBase64 } from "@std/encoding";
-import { html } from "@mark/html";
 
 const sheetId = ensureEnvVar("SHEET_ID");
 
@@ -24,41 +23,31 @@ const csv = new TextDecoder().decode(new Uint8Array(await sheet.downloadAsCSV())
 
 const data = parse(csv, { separator: "," })
 	.map((row, index) => {
-		const rawData = row.slice(0, -4)
 		return {
 			server: index + 1,
-			lastUpdate: rawData.at(-1)!,
-			alliances: rawData.slice(0, -1)
+			lastUpdate: row[10],
+			alliances: row.slice(0, 10)
 				.map(x => x.trim())
 				.filter(x => x !== "-"),
 		};
 	})
-	.filter(x => x.alliances[1] !== "(no alliances)");
+	.filter(x => !(
+		x.alliances[0] === "Closed server"
+			|| x.alliances[1] === "(no alliances)"
+	));
 
-const indexHtml = html`
-	<!DOCTYPE html>
-	<style>
-		html {
-			font-family: system-ui;
+await Deno.writeTextFile("./website/data.js", `window.data = ${JSON.stringify(data)};`);
+
+for (const { server, lastUpdate, alliances } of data) {
+	if (!lastUpdate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+		console.log(`Server ${server}: Invalid update date: ${lastUpdate}`);
+	}
+	for (const alliance of alliances) {
+		if (!alliance.match(/^[a-zA-Z0-9]{3,4}$/)) {
+		console.log(`Server ${server}: Invalid alliance name: ${alliance}`);
 		}
-	</style>
-	<table>
-		<tr>
-			<th>Server</th>
-			<th>Last Update</th>
-			<th>Top 10 Alliances</th>
-		</tr>
-		${data.map(x => html`
-			<tr>
-				<td>${x.server.toString()}</td>
-				<td>${x.lastUpdate}</td>
-				<td>${x.alliances.join(", ")}</td>
-			</tr>
-		`)}
-	</table>
-`();
-
-await Deno.writeTextFile("./website/index.html", indexHtml);
+	}
+}
 
 function ensureEnvVar(name: string) {
 	const envVar = Deno.env.get(name);

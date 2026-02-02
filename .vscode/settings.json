@@ -1,0 +1,6 @@
+{
+	"deno.disablePaths": [
+		"./website/script.js",
+		"./website/worker.js"
+	]
+}

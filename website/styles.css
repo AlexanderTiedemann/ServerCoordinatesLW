@@ -1,0 +1,28 @@
+
+html {
+	font-family: system-ui;
+}
+
+body {
+	display: grid;
+	place-content: center;
+	gap: 2rem;
+	margin: 2rem;
+}
+
+input {
+	font-family: system-ui;
+	font-size: 1.5rem;
+	padding: .5rem;
+}
+
+table {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+th,
+td {
+	border: 1px solid black;
+	padding: .5rem;
+}
